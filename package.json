@@ -10,8 +10,8 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o public",
-    "deploy-storybook": "storybook-to-ghpages",
-    "predeploy-storybook": "npm run build-storybook",
+    "publish": "gh-pages -d public -r https://$GH_TOKEN@github.com/bocadoapp/ui.git",
+    "prepublish": "npm run build-storybook",
     "build:css": "postcss src/**/**/*.scss --dir src/**/**/ --ext css",
     "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
     "start": "run-p watch:css storybook",
@@ -52,6 +52,7 @@
     "@types/jest": "^25.2.1",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
+    "gh-pages": "^2.2.0",
     "node-sass": "^4.13.1",
     "npm-run-all": "^4.1.5",
     "postcss-browser-reporter": "^0.6.0",
