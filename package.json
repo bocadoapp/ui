@@ -9,10 +9,11 @@
   ],
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -c .storybook -o .out",
-    "build:css": "postcss src/**/*.scss --dir dist --ext css",
+    "build-storybook": "build-storybook -c .storybook -o public",
+    "build:css": "postcss src/**/**/*.scss --dir src/**/**/ --ext css",
     "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
     "start": "run-p watch:css storybook",
+    "prestart": "build:css",
     "build": "rollup -c",
     "prebuild": "rimraf ./dist"
   },
@@ -41,6 +42,7 @@
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "@storybook/storybook-deployer": "^2.8.5",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^25.2.1",
     "autoprefixer": "^9.7.6",
