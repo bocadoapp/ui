@@ -10,6 +10,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o public",
+    "deploy-storybook": "storybook-to-ghpages",
     "build:css": "postcss src/**/**/*.scss --dir src/**/**/ --ext css",
     "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
     "start": "run-p watch:css storybook",
