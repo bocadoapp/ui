@@ -1,0 +1,15 @@
+.button {
+  @apply w-full flex justify-center text-white;
+
+  background: #f4783c;
+  background: -webkit-gradient(linear,right top,left top,from(#f4783c),to(#e41c53));
+  background: linear-gradient(270deg,#f4783c,#e41c53);
+
+  &.sm {
+    @apply p-2 rounded text-sm;
+  }
+
+  &.md {
+    @apply p-3 rounded-lg;
+  }
+}

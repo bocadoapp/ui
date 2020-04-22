@@ -1,0 +1,69 @@
+{
+  "name": "@bocado/ui",
+  "version": "1.0.0",
+  "description": "⚛️ React components collections",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build:css": "postcss src/**/*.scss --dir dist --ext css",
+    "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
+    "start": "run-p watch:css storybook",
+    "build": "rollup -c",
+    "prebuild": "rimraf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bocadoapp/ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bocadoapp/ui/issues"
+  },
+  "homepage": "https://github.com/bocadoapp/ui#readme",
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-info": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/react": "^5.3.18",
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "^25.2.1",
+    "autoprefixer": "^9.7.6",
+    "babel-loader": "^8.1.0",
+    "node-sass": "^4.13.1",
+    "npm-run-all": "^4.1.5",
+    "postcss-browser-reporter": "^0.6.0",
+    "postcss-cli": "^7.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.2.1",
+    "postcss-reporter": "^6.0.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.7.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-postcss": "^2.9.0",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "tailwindcss": "^1.3.4",
+    "ts-loader": "^7.0.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}

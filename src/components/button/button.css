@@ -1,0 +1,17 @@
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  background: #f4783c;
+  background: linear-gradient(270deg,#f4783c,#e41c53);
+}
+  .button.sm {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+  .button.md {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
