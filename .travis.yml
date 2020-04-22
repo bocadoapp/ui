@@ -3,7 +3,7 @@ node_js:
   - "10"
 deploy:
   provider: script
-  script: npm install && npm run deploy-storybook
+  script: npm install && npm run publish
   skip_cleanup: true
   on:
     branch: master
