@@ -31,6 +31,30 @@ module.exports = {
 
     config.resolve.extensions.push('.ts', '.tsx');
 
+    config.module.rules = config.module.rules.map(rule => {
+      if (String(rule.test).includes('svg')) {
+        console.log('CONTE SVG', rule);
+        
+        return {
+          ...rule,
+          test: new RegExp(
+            String(rule.test)
+              .substring(1, String(rule.test).length - 1)
+              .replace('svg|', '')
+            ),
+        }
+      }
+
+      return rule
+    })
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack", "url-loader"],
+    })
+
+    console.log(config.module.rules);
+    
     return config
   }
 }

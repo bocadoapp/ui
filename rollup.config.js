@@ -1,6 +1,8 @@
 import typescript from 'rollup-plugin-typescript2'
 import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
+import url from '@rollup/plugin-url'
+import svgr from '@svgr/rollup'
 // import sass from "rollup-plugin-sass"
 // import commonjs from "rollup-plugin-commonjs"
 // import external from "rollup-plugin-peer-deps-external"
@@ -34,7 +36,9 @@ export default {
         { src: 'package.json', dest: 'dist' }
       ]
     }),
-    postcss()    
+    postcss(),
+    svgr(),
+    url()
     // commonjs({
     //   extensions: ['.tsx', '.ts'],
     //   include: ["node_modules/**"],

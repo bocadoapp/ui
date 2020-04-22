@@ -15,3 +15,7 @@
     padding: 0.75rem;
     border-radius: 0.5rem;
   }
+  .button.loading {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
