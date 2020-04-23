@@ -10,14 +10,14 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o public",
-    "publish": "gh-pages -d public -r https://$GH_TOKEN@github.com/bocadoapp/ui.git",
+    "publish": "gh-pages -d public",
     "prepublish": "npm run build-storybook",
     "build:css": "postcss src/**/**/*.scss --dir src/**/**/ --ext css",
     "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
     "start": "run-p watch:css storybook",
     "prestart": "npm run build:css",
-    "build": "rollup -c",
-    "prebuild": "rimraf ./dist"
+    "build:ui": "rollup -c",
+    "prebuild:ui": "rimraf ./dist"
   },
   "repository": {
     "type": "git",
