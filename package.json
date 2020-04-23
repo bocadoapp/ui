@@ -17,7 +17,8 @@
     "start": "run-p watch:css storybook",
     "prestart": "npm run build:css",
     "build:ui": "rollup -c",
-    "prebuild:ui": "rimraf ./dist"
+    "prebuild:ui": "rimraf ./dist",
+    "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",
