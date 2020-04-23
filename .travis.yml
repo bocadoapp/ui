@@ -3,6 +3,7 @@ node_js:
   - "10"
 deploy:
   provider: script
+  github_token: $GH_TOKEN
   script: npm install && npm run publish
   skip_cleanup: true
   on:
