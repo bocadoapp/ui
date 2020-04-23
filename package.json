@@ -1,6 +1,6 @@
 {
   "name": "@bocado/ui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "⚛️ React components collections",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
