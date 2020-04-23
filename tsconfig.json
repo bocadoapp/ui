@@ -3,10 +3,10 @@
     "outDir": "build",
     "module": "esnext",
     "target": "es5",
-    "lib": ["esnext"],
+    "lib": ["dom", "esnext", "es6"],
     "jsx": "react",
     "esModuleInterop": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/components/**/*"],
   "exclude": ["node_modules", "build"]
 }

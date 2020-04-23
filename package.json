@@ -1,19 +1,16 @@
 {
   "name": "@bocado/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "⚛️ React components collections",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o public",
     "publish-public": "gh-pages -d public -r https://$GH_TOKEN@github.com/bocadoapp/blog.git",
     "prepublish-public": "npm run build-storybook",
-    "build:css": "postcss src/**/**/*.scss --dir src/**/**/ --ext css",
-    "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
+    "build:css": "postcss \"src/**/**/*.scss\" --dir \"src/**/**/\" --ext css",
+    "watch:css": "postcss \"src/**/**/*.scss\" --dir \"src/**/**/\" -w --ext css",
     "start": "run-p watch:css storybook",
     "prestart": "npm run build:css",
     "build:ui": "rollup -c",

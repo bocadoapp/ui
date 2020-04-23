@@ -1,25 +1,42 @@
 import React from "react"
 import cn from 'classnames'
 
-import { ReactComponent as Loading } from './loading.svg'
+import { IButton } from './button.d'
+import Loading from './loading'
 import './button.scss'
 
-function Button ({
-  children = 'Button',
-  loading = false,
-  handleOnClick = () => {},
-  className = '',
-  size = 'md'
-}) {  
+function Button (props: IButton) {
+  const { style, type, size, loading, onClick, children, outline } = props
+  const className = cn(
+    'button',
+    size,
+    props.className,
+    loading && 'loading',
+    style,
+    outline && 'outline'
+  )
+
   return (
-    <button 
-      className={cn('button', size, className && className, loading && 'loading')}
+    <button
+      type={type}
+      className={className}
       disabled={loading}
-      onClick={handleOnClick}
+      onClick={onClick}
     >
-      {loading ? <Loading /> : children || 'Button'}
+      {loading ? <Loading /> : children}
     </button>
   )
+}
+
+Button.defaultProps = {
+  type: 'button',
+  size: 'md',
+  className: '',
+  loading: false,
+  children: 'Button',
+  onClick: () => {},
+  style: 'default',
+  outline: false
 }
 
 export default Button
