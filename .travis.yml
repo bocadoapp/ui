@@ -4,7 +4,7 @@ node_js:
 deploy:
   provider: script
   github_token: $GH_TOKEN
-  script: npm install && npm run publish
+  script: npm install && npm run publish-public
   skip_cleanup: true
   on:
     branch: master
