@@ -10,7 +10,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o public",
-    "publish": "gh-pages -d public",
+    "publish": "gh-pages -d public -r https://$GH_TOKEN@github.com/bocadoapp/blog.git",
     "prepublish": "npm run build-storybook",
     "build:css": "postcss src/**/**/*.scss --dir src/**/**/ --ext css",
     "watch:css": "postcss src/**/**/*.scss --dir src/**/**/ -w --ext css",
