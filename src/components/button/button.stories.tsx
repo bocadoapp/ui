@@ -11,6 +11,7 @@ export const Default = () => <Button />
 export const Success = () => <Button styled='success' />
 export const SuccessOutline = () => <Button styled='success' outline />
 export const SuccessOutlineLoading = () => <Button styled='success' outline loading />
+export const Disabled = () => <Button disabled />
 export const Error = () => <Button styled='error' />
 export const Dark = () => <Button styled='dark' />
 export const DarkOutline = () => <Button styled='dark' outline />

@@ -12,6 +12,7 @@ function Button (props: IButton) {
     size,
     props.className,
     loading && 'loading',
+    disabled && 'disabled',
     styled,
     outline && 'outline'
   )
