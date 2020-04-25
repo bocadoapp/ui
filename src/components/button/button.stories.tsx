@@ -8,12 +8,12 @@ export default {
 }
 
 export const Default = () => <Button />
-export const Success = () => <Button style='success' />
-export const SuccessOutline = () => <Button style='success' outline />
-export const SuccessOutlineLoading = () => <Button style='success' outline loading />
-export const Error = () => <Button style='error' />
-export const Dark = () => <Button style='dark' />
-export const DarkOutline = () => <Button style='dark' outline />
+export const Success = () => <Button styled='success' />
+export const SuccessOutline = () => <Button styled='success' outline />
+export const SuccessOutlineLoading = () => <Button styled='success' outline loading />
+export const Error = () => <Button styled='error' />
+export const Dark = () => <Button styled='dark' />
+export const DarkOutline = () => <Button styled='dark' outline />
 export const Small = () => <Button size='sm' />
 export const Loading = () => <Button loading />
 export const WithClassnameShadow = () => <Button className='shadow-md' />

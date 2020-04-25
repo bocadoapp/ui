@@ -6,13 +6,13 @@ import Loading from './loading'
 import './button.scss'
 
 function Button (props: IButton) {
-  const { disabled, style, type, size, loading, onClick, children, outline } = props
+  const { disabled, styled, style, type, size, loading, onClick, children, outline } = props
   const className = cn(
     'button',
     size,
     props.className,
     loading && 'loading',
-    style,
+    styled,
     outline && 'outline'
   )
 
@@ -20,8 +20,9 @@ function Button (props: IButton) {
     <button
       type={type}
       className={className}
-      disabled={!disabled || loading}
+      disabled={disabled || loading}
       onClick={onClick}
+      style={style}
     >
       {loading ? <Loading /> : children}
     </button>
@@ -35,8 +36,10 @@ Button.defaultProps = {
   loading: false,
   children: 'Button',
   onClick: () => {},
-  style: 'default',
-  outline: false
+  styled: 'default',
+  outline: false,
+  style: {},
+  disabled: false
 }
 
 export default Button

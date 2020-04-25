@@ -1,3 +1,5 @@
+import CSS from 'csstype'
+
 export interface IButton {
   children: any,
   loading: boolean,
@@ -5,7 +7,8 @@ export interface IButton {
   className: string,
   size: string,
   type: "button" | "submit" | "reset",
-  style: "default" | "success" | "error" | "dark",
+  styled: "default" | "success" | "error" | "dark",
   outline: boolean,
-  disabled: boolean
+  disabled: boolean,
+  style: CSS.Properties
 }
