@@ -6,5 +6,6 @@ export interface IButton {
   size: string,
   type: "button" | "submit" | "reset",
   style: "default" | "success" | "error" | "dark",
-  outline: boolean
+  outline: boolean,
+  disabled: boolean
 }
