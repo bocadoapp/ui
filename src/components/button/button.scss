@@ -5,16 +5,24 @@
     flex
     justify-center
     text-white
-    border-4
+    border
     overflow-hidden;
 
   transition: all 0.2s ease-in;
   border-color: rgba(255, 255, 255, .5);
 
+  svg {
+    @apply fill-current;
+  }
+
   /*
   ** Styles
   */
   &.default {
+    @apply bg-transparent text-gray-800 border-gray-300;
+  }
+ 
+  &.gradient {
     background: #f4783c;
     background: -webkit-gradient(linear,right top,left top,from(#f4783c),to(#e41c53));
     background: linear-gradient(270deg,#f4783c,#e41c53);
@@ -32,10 +40,14 @@
     &.outline {
       @apply bg-transparent border-green-600 text-green-600;
 
+      svg {
+        @apply fill-current;
+      }
+
       &:hover {
         @apply bg-green-600 text-white;
       }
-    }
+    } 
   }
 
   &.dark {
@@ -50,13 +62,6 @@
 
       &:hover {
         @apply bg-gray-900 text-white;
-      }
-
-      &.loading {
-        svg {
-          fill: red !important;
-          border: 1px solid red;
-        }
       }
     }    
   }  
@@ -86,13 +91,14 @@
 
   &.loading {
     @apply opacity-50 cursor-not-allowed;
-    svg {
-      fill: white;
-    }
   }
 
   &:hover {
     background-position: 50% 50%;
     transition: all 0.2s ease-in;
   }
+
+  @screen md {
+    @apply border-2;
+  }  
 }

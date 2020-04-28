@@ -7,7 +7,7 @@ export interface IButton {
   className: string,
   size: string,
   type: "button" | "submit" | "reset",
-  styled: "default" | "success" | "error" | "dark",
+  styled: "default" | "gradient" | "success" | "error" | "dark",
   outline: boolean,
   disabled: boolean,
   style: CSS.Properties

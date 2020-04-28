@@ -13,7 +13,7 @@ function Button (props: IButton) {
     props.className,
     loading && 'loading',
     disabled && 'disabled',
-    styled,
+    styled ? styled : !props.className ? 'default' : '',
     outline && 'outline'
   )
 
@@ -37,7 +37,7 @@ Button.defaultProps = {
   loading: false,
   children: 'Button',
   onClick: () => {},
-  styled: 'default',
+  styled: '',
   outline: false,
   style: {},
   disabled: false
