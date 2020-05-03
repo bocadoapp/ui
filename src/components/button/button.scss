@@ -19,7 +19,11 @@
   ** Styles
   */
   &.default {
-    @apply bg-transparent text-gray-800 border-gray-300;
+    @apply bg-gray-100 text-gray-800 border-gray-300;
+
+    &:hover {
+      @apply bg-gray-200;
+    }
   }
  
   &.gradient {
