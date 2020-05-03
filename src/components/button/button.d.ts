@@ -1,9 +1,10 @@
 import CSS from 'csstype'
+import { MouseEvent } from 'react'
 
 export interface IButton {
   children: any,
   loading: boolean,
-  onClick(): undefined,
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void,
   className: string,
   size: string,
   type: "button" | "submit" | "reset",
