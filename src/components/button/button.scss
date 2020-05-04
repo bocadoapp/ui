@@ -6,7 +6,8 @@
     justify-center
     text-white
     border
-    overflow-hidden;
+    overflow-hidden
+    rounded-full;
 
   transition: all 0.2s ease-in;
   border-color: rgba(255, 255, 255, .5);
@@ -82,11 +83,11 @@
   ** Sizes
   */
   &.sm {
-    @apply p-2 rounded text-sm;
+    @apply p-2 text-sm;
   }
 
   &.md {
-    @apply p-3 rounded-lg;
+    @apply p-3;
   }
 
   &.disabled {
