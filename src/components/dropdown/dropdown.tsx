@@ -1,9 +1,23 @@
-import React, { useRef ,useState, useCallback } from 'react'
+import React, { useRef ,useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import cn from 'classnames'
 
 import './dropdown.scss'
 
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: -10
+  },
+  visible: {
+    display: 'flex',
+    opacity: 1,
+    y: 10
+  }
+}
+
 function Dropdown (props) {
+  const { width, children, className, onClick } = props
   const [open, toggleOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const refs = {
@@ -12,15 +26,15 @@ function Dropdown (props) {
     menu: useRef(null)
   }
 
-  const handleOnClick = useCallback(() => {
+  const onClickCb = useCallback(() => {
     toggleOpen(!open)
 
-    if (props.onClick) {
-      props.onClick()
+    if (onClick) {
+      onClick()
     }
-  }, [props.onClick, toggleOpen, open])
+  }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (mounted && open) {
       const outerClick = e => {
         if (!refs.wrapper.current.contains(e.target)) {
@@ -59,35 +73,39 @@ function Dropdown (props) {
 
   return (
     <div
-      className={cn('dropdown', props.className)}
+      className={cn('dropdown', className)}
       ref={refs.wrapper}
-      key={`dropdown-${props.className}`}
+      key={`dropdown-${className}`}
     >
-      <div className='dropdown-trigger' onClick={handleOnClick} ref={refs.trigger}>
-        {props.children[0]}
+      <div className='dropdown-trigger' onClick={onClickCb} ref={refs.trigger}>
+        {children[0]}
       </div>
       {
-          open && (
-            <div
-              // initial='hidden'
-              // exit='hidden'
-              // animate='visible'
-              // variants={variants}
+        <AnimatePresence exitBeforeEnter>
+          {open && (
+            <motion.div
+              initial='hidden'
+              exit='hidden'
+              animate='visible'
+              variants={variants}
               className='dropdown-menu'
-              key={props.className}
+              key={className}
               ref={refs.menu}
-              style={props.width ? { width: props.width } : {}}
+              style={width ? { width: width } : {}}
             >
-              <ul>{props.children[1]}</ul>
-            </div>
-          )
+              <ul>{children[1]}</ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       }
     </div>
   )
 }
 
-Dropdown.Trigger = ({ children }) => children
-Dropdown.Menu = ({ children }) => children
-Dropdown.Item = ({ children }) => <li>{children}</li>
+export const Trigger: React.FC<{ children: any }> = ({ children }) => children
+export const Menu = ({ children }) => children
+export const Item = ({ children }) => <li>{children}</li>
+Trigger.displayName = 'DropdownTrigger'
+Menu.displayName = 'DropdownMenu'
 
 export default Dropdown
