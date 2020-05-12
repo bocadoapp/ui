@@ -1,3 +1,26 @@
 .dropdown {
-  @apply border border-red-500;
+  @apply relative flex h-full items-stretch;
+}
+
+.dropdown .dropdown-trigger {
+  @apply flex items-center cursor-pointer;
+}
+
+.dropdown .dropdown-menu {
+  @apply
+    bg-white
+    absolute
+    p-4
+    rounded-lg
+    shadow-xl
+    border
+    border-gray-100
+    flex-col;  
+  z-index: 9999;
+  top: 100%;
+  min-width: 8rem;
+}
+
+.dropdown .dropdown-menu ul li {
+  @apply py-2 text-sm mr-0 cursor-pointer;
 }

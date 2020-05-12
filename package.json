@@ -35,7 +35,8 @@
     "react-dom": "^16.13.1"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "framer-motion": "^1.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
