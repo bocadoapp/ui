@@ -10,6 +10,13 @@ import svgr from '@svgr/rollup'
 
 import packageJson from "./package.json"
 
+const transform = contents => {
+  const o = JSON.parse(contents.toString())
+  o.main = 'index.js'
+  o.module = 'index.es.js'
+  return JSON.stringify(o, null, 2)
+}
+
 export default {
   input: "src/index.tsx",
   output: [
@@ -24,6 +31,7 @@ export default {
       sourcemap: true
     }
   ],
+  external: ['react', 'classnames', 'framer-motion'],
   plugins: [
     // external(),
     // resolve({
@@ -33,7 +41,11 @@ export default {
     typescript(),
     copy({
       targets: [
-        { src: 'package.json', dest: 'dist' }
+        {
+          src: 'package.json',
+          dest: 'dist',
+          transform
+        }
       ]
     }),
     postcss(),
