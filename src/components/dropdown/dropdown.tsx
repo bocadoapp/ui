@@ -36,7 +36,9 @@ const Dropdown: TDropdown<any> = (props) => {
   }, [])
 
   useEffect(() => {
-    if (mounted && open) {
+    if (!mounted) {
+      setMounted(true)
+    } else if (mounted && open) {
       const outerClick = e => {
         if (!refs.wrapper.current.contains(e.target)) {
           toggleOpen(false)
@@ -63,10 +65,6 @@ const Dropdown: TDropdown<any> = (props) => {
       return () => document.removeEventListener('click', outerClick)
     }
   }, [mounted, open, refs])
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   if (!mounted) {
     return null

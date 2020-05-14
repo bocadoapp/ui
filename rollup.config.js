@@ -11,10 +11,12 @@ import svgr from '@svgr/rollup'
 import packageJson from "./package.json"
 
 const transform = contents => {
-  const o = JSON.parse(contents.toString())
-  o.main = 'index.js'
-  o.module = 'index.es.js'
-  return JSON.stringify(o, null, 2)
+  const pkg = JSON.parse(contents.toString())
+  pkg.main = 'index.js'
+  pkg.module = 'index.es.js'
+  // pkg.dependencies = { ...pkg.peerDependencies }
+  // delete pkg.peerDependencies
+  return JSON.stringify(pkg, null, 2)
 }
 
 export default {
