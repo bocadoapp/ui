@@ -2,6 +2,7 @@ import React, { useRef ,useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import cn from 'classnames'
 
+import { TDropdown } from './dropdown.d'
 import './dropdown.scss'
 
 const variants = {
@@ -16,7 +17,7 @@ const variants = {
   }
 }
 
-function Dropdown (props) {
+const Dropdown: TDropdown<any> = (props) => {
   const { width, children, className, onClick } = props
   const [open, toggleOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -102,10 +103,11 @@ function Dropdown (props) {
   )
 }
 
-export const Trigger: React.FC<{ children: any }> = ({ children }) => children
-export const Menu = ({ children }) => children
-export const Item = ({ children }) => <li>{children}</li>
-Trigger.displayName = 'DropdownTrigger'
-Menu.displayName = 'DropdownMenu'
+Dropdown.Trigger = ({ children }) => <>{children}</>
+Dropdown.Menu = ({ children }) => <>{children}</>
+Dropdown.Item = ({ children }) => <li>{children}</li>
+Dropdown.Trigger.displayName = 'DropdownTrigger'
+Dropdown.Menu.displayName = 'DropdownMenu'
+Dropdown.Item.displayName = 'DropdownItem'
 
 export default Dropdown

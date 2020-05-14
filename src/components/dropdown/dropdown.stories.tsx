@@ -1,15 +1,15 @@
 import React from 'react'
 
-import Dropdown, { Trigger, Menu } from './dropdown'
+import Dropdown from './dropdown'
 
 export const Default = () => (
   <Dropdown>
-    <Trigger>
+    <Dropdown.Trigger>
       trigger
-    </Trigger>
-    <Menu>
+    </Dropdown.Trigger>
+    <Dropdown.Menu>
       menu
-    </Menu>
+    </Dropdown.Menu>
   </Dropdown>
 )
 
