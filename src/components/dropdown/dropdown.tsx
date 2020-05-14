@@ -64,7 +64,7 @@ const Dropdown: TDropdown<any> = (props) => {
     }
   }, [mounted, open, refs])
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true)
   }, [])
 
