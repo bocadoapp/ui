@@ -32,12 +32,11 @@
   "homepage": "https://github.com/bocadoapp/ui#readme",
   "peerDependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
-  "dependencies": {
+    "react-dom": "^16.13.1",
     "classnames": "^2.2.6",
-    "framer-motion": "^1.10.3"
+    "framer-motion": "^1.10.3"    
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@rollup/plugin-url": "^4.0.2",
