@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown } from '../../'
+import { Dropdown } from '../../../dist'
 
 const variants = {
   hidden: {
@@ -30,6 +30,25 @@ export const Animated = () => (
   <Dropdown>
     <Dropdown.Trigger>
       trigger
+    </Dropdown.Trigger>
+    <Dropdown.Menu
+      variants={variants} 
+      initial='hidden'
+      animate='visible'
+      exit='hidden'
+    >
+      <div>
+        content y tal
+      </div>
+    </Dropdown.Menu>
+  </Dropdown>
+)
+
+export const MultipleTriggerElements = () => (
+  <Dropdown>
+    <Dropdown.Trigger>
+      <span role='img' aria-label='globe'>🌐</span>
+      ca
     </Dropdown.Trigger>
     <Dropdown.Menu
       variants={variants} 
