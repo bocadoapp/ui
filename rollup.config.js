@@ -3,12 +3,19 @@ import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
 import url from '@rollup/plugin-url'
 import svgr from '@svgr/rollup'
-// import sass from "rollup-plugin-sass"
-// import commonjs from "rollup-plugin-commonjs"
-// import external from "rollup-plugin-peer-deps-external"
-// import resolve from "rollup-plugin-node-resolve"
-
+import commonjs from "@rollup/plugin-commonjs"
+import replace from '@rollup/plugin-replace'
 import packageJson from "./package.json"
+import resolve from '@rollup/plugin-node-resolve';
+
+const transform = contents => {
+  const pkg = JSON.parse(contents.toString())
+  pkg.main = 'index.js'
+  pkg.module = 'index.es.js'
+  // pkg.dependencies = { ...pkg.peerDependencies }
+  // delete pkg.peerDependencies
+  return JSON.stringify(pkg, null, 2)
+}
 
 export default {
   input: "src/index.tsx",
@@ -24,37 +31,26 @@ export default {
       sourcemap: true
     }
   ],
+  external: [
+    ...Object.keys(packageJson.peerDependencies),
+    ...Object.keys(packageJson.devDependencies)
+  ], 
   plugins: [
-    // external(),
-    // resolve({
-    //   jsnext: true,
-    //   extensions: ['.tsx', '.ts']
-    // }),
-    typescript(),
+    replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
+    resolve({ mainFields: ["module"] }),
+    commonjs({ include: 'node_modules/**' }),   
+    typescript({ rollupCommonJSResolveHack: true }),
     copy({
       targets: [
-        { src: 'package.json', dest: 'dist' }
+        {
+          src: 'package.json',
+          dest: 'dist',
+          transform
+        }
       ]
     }),
     postcss(),
     svgr(),
     url()
-    // commonjs({
-    //   extensions: ['.tsx', '.ts'],
-    //   include: ["node_modules/**"],
-    //   exclude: ["**/*.stories.tsx"],
-    //   namedExports: {
-    //     "node_modules/react/react.js": [
-    //       "Children",
-    //       "Component",
-    //       "PropTypes",
-    //       "createElement"
-    //     ],
-    //     "node_modules/react-dom/index.js": ["render"]
-    //   }
-    // }),
-    // sass({
-    //   insert: true
-    // })
   ]
 };
