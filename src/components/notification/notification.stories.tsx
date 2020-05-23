@@ -11,3 +11,5 @@ export const Default = () => <Notification />
 export const Success = () => <Notification type='success' />
 export const Error = () => <Notification type='error' />
 export const DoesntDisappear = () => <Notification disappear={false} />
+export const CallbackOnDisappear = () => <Notification onDisappear={() => console.log('DISAPPEARED!')} />
+

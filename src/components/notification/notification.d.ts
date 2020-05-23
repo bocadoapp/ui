@@ -6,5 +6,6 @@ export interface INotification {
   delay: number,
   type: 'default' | 'success' | 'error', 
   size: ESizes,
-  className: string
+  className: string,
+  onDisappear(): void
 }
