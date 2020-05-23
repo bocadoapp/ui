@@ -7,11 +7,17 @@ import './notification.scss'
 function Notification (props: INotification) {
   const [mounted, setMounted] = useState(true)
   const timeout = useRef(null)
-  const { children, disappear, delay, type, size } = props
+  const { children, onDisappear, disappear, delay, type, size } = props
 
   useEffect(() => {
     if (disappear) {
-      timeout.current = setTimeout(() => setMounted(false), delay)
+      timeout.current = setTimeout(() => {
+        setMounted(false)
+
+        if (onDisappear) {
+          onDisappear()
+        }
+      }, delay)
     }
     setMounted(true)
 
@@ -45,7 +51,8 @@ Notification.defaultProps = {
   delay: 3000,
   type: 'default',
   size: 'md',
-  className: ''
+  className: '',
+  onDisappear: null
 }
 
 export default Notification
