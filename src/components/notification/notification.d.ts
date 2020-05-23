@@ -7,5 +7,6 @@ export interface INotification {
   type: 'default' | 'success' | 'error', 
   size: ESizes,
   className: string,
-  onDisappear(): void
+  onDisappear(): void,
+  style: React.CSSProperties
 }
