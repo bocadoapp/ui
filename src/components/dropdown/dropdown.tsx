@@ -1,86 +1,48 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  cloneElement,
-  Children,
-  forwardRef,
-  isValidElement,
-  memo
-} from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useRef, useState, useEffect } from 'react'
 import cn from 'classnames'
 
-import { TDropdown } from './dropdown.d'
 import './dropdown.scss'
 
-interface IChild {
-  children?: React.ReactNode
-}
-
-const renderDropdownElements = (children: React.ReactNode, props: any, refs) => {  
-  return Children.map(children, (child: React.ReactElement<IChild>) => {
-    if (!isValidElement(child)) {
-      return child
-    }
-
-    if (child.type === Dropdown.Trigger) {
-      return cloneElement(child, {
-        ...props,
-        ...child.props,
-        ref: refs.DropdownTrigger
-      })
-    }
-
-    if (child.type === Dropdown.Menu) {      
-      return cloneElement(child, {
-        ...props,
-        ...child.props,
-        ref: refs.DropdownMenu
-      })      
-    }
-
-    if (child.props.children) {
-      child = cloneElement(child, { children: renderDropdownElements(child.props.children, props, refs) })
-    }
-
-    return child
- })
-}
-
-const Dropdown: TDropdown<any> = (props) => {
-  const { children, width, className, onClick } = props
-  const [open, toggleOpen] = useState(false)
+const Dropdown = (props: any) => {
+  const { children } = props
+  const refs = { wrapper: useRef(null), trigger: useRef(null), menu: useRef(null) }
+  const [isOpen, toggleOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const refs = {
-    wrapper: useRef(null),
-    DropdownTrigger: useRef(null),
-    DropdownMenu: useRef(null)
+
+  function getTriggerProps() {
+    return {
+      onClick: handleOnClick,
+      ref: refs.trigger,
+      className: cn('dropdown-trigger'),
+      key: 'dropdown-trigger'
+    }
   }
 
-  const handleOnClick = useCallback(() => {
-    toggleOpen(!open)
-
-    if (onClick) {
-      onClick()
+  function getMenuProps () {
+    return {
+      className: 'dropdown-menu',
+      key: 'dropdown-menu',
+      ref: refs.menu
     }
-  }, [open, toggleOpen, onClick])
+  }
 
-  const outerClick = useCallback(
-    e => (!refs.wrapper.current.contains(e.target) && toggleOpen(false)),
-    [toggleOpen, refs.wrapper]
-  )
+  function handleOnClick () {
+    toggleOpen(!isOpen)
+  }
+
+  function outerClick (e) {
+    return !refs.wrapper.current.contains(e.target) && toggleOpen(false)
+  }
 
   useEffect(() => {
     if (!mounted) {
       return setMounted(true)
     }
 
-    if (open) {
-      let left = (refs.DropdownMenu.current.offsetWidth / 2) - (refs.DropdownTrigger.current.offsetWidth / 2)
-      const menuBounding = refs.DropdownMenu.current.getBoundingClientRect()
-      const triggerBounding = refs.DropdownTrigger.current.getBoundingClientRect()
+    if (isOpen) {
+      let left = (refs.menu.current.offsetWidth / 2) - (refs.trigger.current.offsetWidth / 2)
+      const menuBounding = refs.menu.current.getBoundingClientRect()
+      const triggerBounding = refs.trigger.current.getBoundingClientRect()
       const posWidth = Math.max(menuBounding.width, triggerBounding.width)
       const rightDiff = window.innerWidth - (triggerBounding.right + posWidth / 2)
       const leftDiff = triggerBounding.left - menuBounding.width / 2
@@ -93,78 +55,23 @@ const Dropdown: TDropdown<any> = (props) => {
         left = left + leftDiff
       }
   
-      refs.DropdownMenu.current.style.left = `-${left}px`
+      refs.menu.current.style.left = `-${left}px`
     }
 
     document.addEventListener('click', outerClick)
 
     return () => document.removeEventListener('click', outerClick)
-  }, [mounted, open])
-  
+  }, [mounted, isOpen])
+
   return (
     <div
-      className={cn('dropdown', className)}
+      className={cn('dropdown', props.className)}
       ref={refs.wrapper}
-      key={`dropdown-${className}`}
+      key={`dropdown-${props.className}`}
     >
-      {renderDropdownElements(
-        typeof children === 'function' ? children({ open, handleOnClick }) : children,
-        { open, handleOnClick },
-        refs
-      )}
+      {children({ getTriggerProps, getMenuProps, isOpen, toggleOpen, handleOnClick })}
     </div>
   )
 }
-
-Dropdown.Trigger = memo(forwardRef((props: any, ref: any) => {  
-  return (
-    <div
-      key='dropdown-trigger'
-      className='dropdown-trigger'
-      onClick={props.handleOnClick}
-      ref={ref}
-    >
-      {props.children}
-    </div>
-  )
-}))
-
-Dropdown.Menu = memo(forwardRef((props: any, ref: any) => {
-  const { exit, open, variants, initial, animate, className, children } = props
-
-  if (animate && initial) {
-    return (
-      <AnimatePresence exitBeforeEnter>
-        {open && (
-          <motion.div
-            className='dropdown-menu'
-            key={className}
-            ref={ref}
-            variants={variants}
-            animate={animate}
-            initial={initial}
-            exit={exit}
-          >  
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    )
-  }
-  
-  return open && (
-    <div
-      className='dropdown-menu'
-      key={className}
-      ref={ref}
-    >  
-      {children}
-    </div>
-  )
-}))
-
-Dropdown.displayName = 'Dropdown'
-Dropdown.Trigger.displayName = 'DropdownTrigger'
-Dropdown.Menu.displayName = 'DropdownMenu'
 
 export default Dropdown
