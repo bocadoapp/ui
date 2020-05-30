@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Dropdown } from '../../'
 
 const variants = {
@@ -15,51 +16,86 @@ const variants = {
 
 export const Default = () => (
   <Dropdown>
-    <Dropdown.Trigger>
-      trigger
-    </Dropdown.Trigger>
-    <Dropdown.Menu>
-      <div>
-        content y tal
-      </div>
-    </Dropdown.Menu>
+    {({ getTriggerProps, getMenuProps, isOpen, toggleOpen }) => (
+        <>
+          <div {...getTriggerProps()}>
+            trigger
+          </div>
+          {isOpen && (
+            <div {...getMenuProps()}>
+              content y tal
+            </div>
+          )}
+        </>
+    )}
+  </Dropdown>
+)
+
+export const OnClickDisappear = () => (
+  <Dropdown>
+    {({ getTriggerProps, getMenuProps, isOpen, toggleOpen }) => (
+      <>
+        <div {...getTriggerProps()}>
+          trigger
+        </div>
+        {isOpen && (
+          <div {...getMenuProps()} onClick={() => toggleOpen(!isOpen)}>
+            content y tal
+          </div>
+        )}
+      </>
+    )}
   </Dropdown>
 )
 
 export const Animated = () => (
   <Dropdown>
-    <Dropdown.Trigger>
-      trigger
-    </Dropdown.Trigger>
-    <Dropdown.Menu
-      variants={variants} 
-      initial='hidden'
-      animate='visible'
-      exit='hidden'
-    >
-      <div>
-        content y tal
-      </div>
-    </Dropdown.Menu>
+    {({ getTriggerProps, getMenuProps, isOpen, toggleOpen }) => (
+      <>
+        <div {...getTriggerProps()}>
+          trigger
+        </div>
+        <AnimatePresence exitBeforeEnter>
+          {isOpen && (
+            <motion.div
+              {...getMenuProps()}
+              variants={variants}
+              animate='visible'
+              initial='hidden'
+              exit='hidden'
+            >
+              content y tal
+            </motion.div>
+          )}            
+        </AnimatePresence>
+      </>
+    )}
   </Dropdown>
 )
 
-export const MultipleTriggerElements = () => (
+export const AnimateOnClickDisappear = () => (
   <Dropdown>
-    <Dropdown.Trigger>
-      <span role='img' aria-label='globe'>🌐</span>
-      ca
-    </Dropdown.Trigger>
-    <Dropdown.Menu
-      variants={variants} 
-      initial='hidden'
-      animate='visible'
-      exit='hidden'
-    >
-      <div>
-        content y tal
-      </div>
-    </Dropdown.Menu>
+    {({ getTriggerProps, getMenuProps, isOpen, toggleOpen }) => (
+      <>
+        <div {...getTriggerProps()}>
+          trigger
+        </div>
+        <AnimatePresence exitBeforeEnter>
+          {isOpen && (
+            <motion.div
+              {...getMenuProps()}
+              variants={variants}
+              animate='visible'
+              initial='hidden'
+              exit='hidden'
+              onClick={() => toggleOpen(!isOpen)}
+            >
+              content y tal
+            </motion.div>
+          )}            
+        </AnimatePresence>
+      </>
+    )}
   </Dropdown>
 )
 
